@@ -22,7 +22,7 @@ const Image = styled(Box)`
   background: #2874f0
     url(https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/login_img_c4a81e.png)
     center 85% no-repeat;
-  height: 83%;
+  height: 100%;
   width: 30%;
   padding: 50px 35px;
   & > p,
@@ -40,7 +40,7 @@ const Wrapper = styled(Box)`
   & > div,
   & > p,
   & > button {
-    margin-top: 20px;
+    margin-top: 15px;
   }
 `;
 
@@ -138,6 +138,10 @@ const LoginDialog = ({ open, setOpen }) => {
   const toggleSignup = () => {
     toggleAccount(accountInitialValue.signup);
   };
+
+  const toggleLogin = () => {
+    toggleAccount(accountInitialValue.login);
+  }
 
   const onInputChange = (e) => {
     setSignup({ ...signup, [e.target.name]: e.target.value });
@@ -255,6 +259,9 @@ const LoginDialog = ({ open, setOpen }) => {
                 name="phone"
               />
               <LoginButton onClick={() => signupUser()}>Continue</LoginButton>
+              <CreateAccount onClick={() => toggleLogin()}>
+                Already have an account? Login
+              </CreateAccount>
             </Wrapper>
           )}
         </Box>

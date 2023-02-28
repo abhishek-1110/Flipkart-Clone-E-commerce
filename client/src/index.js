@@ -8,6 +8,7 @@ import store from "./redux/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
+  // react redux provider
   <Provider store={store}>
   <React.StrictMode>
     <App />

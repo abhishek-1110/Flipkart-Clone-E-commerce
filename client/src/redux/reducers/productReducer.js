@@ -2,6 +2,7 @@
 // also contains switch statement
 
 import * as actionTypes from "../constants/productConstant";
+
 export const getProductsReducer = (state = { products: [] }, action) => {
   switch (action.type) {
     case actionTypes.GET_PRODUCTS_SUCCESS:

@@ -8,17 +8,16 @@ import {
   getProductsReducer,
 } from "./reducers/productReducer";
 
-import { getelectronicsProductsReducer } from "./reducers/electronicsproductReducer";
+
 import { cartReducer } from "./reducers/cartReducer";
 
 const reducer = combineReducers({
   getProducts: getProductsReducer,
   getProductDetails: getProductDetailsReducer,
-  getelectronicsProducts: getelectronicsProductsReducer,
   cart: cartReducer,
 });
 
-const middleware = [thunk];
+const middleware = [thunk]; // thunk helps in executing aysnc functions
 // we can use redux toolkit instead of createstore
 // ... rest operator
 const store = createStore(

@@ -12,6 +12,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DetailView from "./components/details/DetailView";
 
 import Cart from "./components/cart/Cart";
+import Footer from "./components/footer/Footer";
 
 function App() {
   return (
@@ -26,6 +27,8 @@ function App() {
             <Route path="/cart" element={<Cart />} />
           </Routes>
         </Box>
+        <Footer/>
+
       </BrowserRouter>
     </DataProvider>
   );

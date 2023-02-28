@@ -13,9 +13,9 @@ import { styled } from "@mui/material";
 import { Box } from "@mui/material";
 import { getProducts } from "../../redux/actions/productActions";
 
-import { electronicsproducts } from "../../utils/ElectronicsData";
-
 import { useDispatch, useSelector } from "react-redux"; // hooks
+
+
 const Component = styled(Box)`
   padding: 10px 10px;
   background: #f2f2f2;
@@ -28,15 +28,12 @@ const Home = () => {
   // console.log(products);
   const { products } = useSelector((state) => state.getProducts);
 
-  // const { electronicsproducts } = useSelector(
-  //   (state) => state.getelectronicsProducts
-  // );
 
-  // console.log(electronicsproducts);
-
+  
   const dispatch = useDispatch();
 
   useEffect(() => {
+
     dispatch(getProducts());
   }, [dispatch]);
 
@@ -47,7 +44,7 @@ const Home = () => {
         <Banner />
         <MidSlide products={products} title="Deal of the Day" timer={true} />
         <MidSection />
-        <Slide products={electronicsproducts} title="Electronic Products" />
+        <Slide products={products} title="Electronic Products" />
       </Component>
     </>
   );
