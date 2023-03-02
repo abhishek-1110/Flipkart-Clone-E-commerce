@@ -24,6 +24,7 @@ import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import { pincodes } from "../../constants/pincodes";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 
+
 const Component = styled(Box)`
   background: #f2f2f2;
   margin-top: 55px;

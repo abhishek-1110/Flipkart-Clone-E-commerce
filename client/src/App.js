@@ -13,6 +13,7 @@ import DetailView from "./components/details/DetailView";
 
 import Cart from "./components/cart/Cart";
 import Footer from "./components/footer/Footer";
+import DetailView2 from "./components/details/DetailView2";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="/" element={<Home />} />
             {/* <Route path="/product/:id" element={<DetailView />} /> */}
             <Route path="/product/:id" element={<DetailView />} />
+            <Route path="/electronicsProduct/:id" element={<DetailView2 />} />
             <Route path="/cart" element={<Cart />} />
           </Routes>
         </Box>

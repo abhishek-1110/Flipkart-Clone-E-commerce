@@ -10,10 +10,12 @@ import {
 
 
 import { cartReducer } from "./reducers/cartReducer";
-
+import { getElectronicsProductsReducer, getElectronicsProductDetailsReducer } from "./reducers/electronicsProductReducer";
 const reducer = combineReducers({
   getProducts: getProductsReducer,
   getProductDetails: getProductDetailsReducer,
+  getElectronicsProducts: getElectronicsProductsReducer,
+  getElectronicsProductDetails: getElectronicsProductDetailsReducer,
   cart: cartReducer,
 });
 

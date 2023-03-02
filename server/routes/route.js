@@ -21,7 +21,7 @@ router.get("/product/:id", getProductById);
 
 
 router.get("/electronicsproducts", getelectronicsProducts);
-router.get("/electronicsproduct/:id", getelectronicsProductById);
+router.get("/electronicsProduct/:id", getelectronicsProductById);
 
 router.post("/payment", addPaymentGateway);
 router.post("/callback", paytmResponse);

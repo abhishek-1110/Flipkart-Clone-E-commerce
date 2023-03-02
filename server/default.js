@@ -6,12 +6,14 @@ import ElectronicsProduct from "./model/electronicsProduct-schema.js";
 
 const DefaultData = async () => {
   try {
-    // await Product.deleteMany({}); // for removing the duplicacy again n again by starting server it keeps adding data into sever
+     await Product.deleteMany({}); // for removing the duplicacy again n again by starting server it keeps adding data into sever
 
     await Product.insertMany(products);
+    await ElectronicsProduct.deleteMany({});
     await ElectronicsProduct.insertMany(electronicsproducts);
 
     console.log("data imported successfully");
+    
   } catch (error) {
     console.log("error while inserting default data", error.message);
   }

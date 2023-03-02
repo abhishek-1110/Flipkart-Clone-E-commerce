@@ -15,7 +15,9 @@ import { getProducts } from "../../redux/actions/productActions";
 
 import { useDispatch, useSelector } from "react-redux"; // hooks
 
+import Slide2 from "./Slide2";
 
+import { getElectronicsProducts } from "../../redux/actions/electronicsProductActions";
 const Component = styled(Box)`
   padding: 10px 10px;
   background: #f2f2f2;
@@ -28,15 +30,16 @@ const Home = () => {
   // console.log(products);
   const { products } = useSelector((state) => state.getProducts);
 
-
+  const { electronicsProducts } = useSelector((state) => state.getElectronicsProducts);
   
   const dispatch = useDispatch();
 
   useEffect(() => {
-
     dispatch(getProducts());
+    dispatch(getElectronicsProducts());
   }, [dispatch]);
 
+  
   return (
     <>
       <NavBar />
@@ -45,6 +48,9 @@ const Home = () => {
         <MidSlide products={products} title="Deal of the Day" timer={true} />
         <MidSection />
         <Slide products={products} title="Electronic Products" />
+        <Slide products={products} title="Accessories" />
+        <Slide2 products={electronicsProducts} title="Life Savers2 check" />
+
       </Component>
     </>
   );
