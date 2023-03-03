@@ -13,7 +13,7 @@ const responsive = {
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
-    items: 2,
+    items: 1,
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
@@ -56,6 +56,11 @@ const ViewAllButton = styled(Button)`
 const Image = styled("img")({
   width: "auto",
   height: 150,
+  marginBottom: 10,
+  '&:hover': {
+    transform: "scale(1.1)",
+    transition: "0.2s ease-in-out",
+  }
 });
 
 const Text = styled(Typography)`
@@ -99,8 +104,8 @@ const Slide = ({ products, title, timer }) => {
         responsive={responsive}
         swipeable={true}
         draggable={false}
-        infinite={true}
-        autoPlay={false}
+        infinite={false}
+        autoPlay={true}
         centerMode={true}
         autoPlaySpeed={1000}
         dotListClass="custom-dot-list-style"
