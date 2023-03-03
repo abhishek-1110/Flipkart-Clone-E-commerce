@@ -14,6 +14,7 @@ const electronicsproductSchema = new mongoose.Schema({
   quantity: Number,
   description: String,
   discount: String,
+  seller: String,
   tagline: String,
 });
 
