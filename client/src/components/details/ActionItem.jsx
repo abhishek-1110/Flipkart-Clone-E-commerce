@@ -23,7 +23,10 @@ const LeftContainer = styled(Box)(({ theme }) => ({
 }));
 
 const Image = styled("img")({
+  width:"auto",
+  height:"350px",
   padding: 15,
+
 });
 
 const StyledButton = styled(Button)`
@@ -60,6 +63,8 @@ const ActionItem = ({ product }) => {
     <LeftContainer>
       <Box
         style={{
+          height: 400,
+          textAlign: "center",
           padding: "15px 20px",
           border: "1px solid #f0f0f0",
         }}
