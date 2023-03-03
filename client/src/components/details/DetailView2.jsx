@@ -93,10 +93,12 @@ const DetailView2 = () => {
 
   const [loading, setLoading] = useState(true);
 
+
   useEffect(() => {
     dispatch(getElectronicsProductDetails(id));
     setLoading(false);
   }, [dispatch]);
+
 
   const checkingValidPinCode = () => {
     let result = document.getElementById("pincode").value;
@@ -115,7 +117,7 @@ const DetailView2 = () => {
     }
   };
   return (
-    <>
+    <Component>
       {loading == false ? (
         electronicsProduct &&
         Object.keys(electronicsProduct).length && (
@@ -268,7 +270,7 @@ const DetailView2 = () => {
 
                   <TableRow>
                     <TableData>Seller</TableData>
-                    <TableCell style={{ border: "none" }}></TableCell>
+                    <TableCell style={{ border: "none" }}>{electronicsProduct.seller}</TableCell>
                   </TableRow>
 
                   <TableRow>
@@ -291,7 +293,7 @@ const DetailView2 = () => {
       ) : (
         <div>Loading.......</div>
       )}
-    </>
+    </Component>
   );
 };
 export default DetailView2;
