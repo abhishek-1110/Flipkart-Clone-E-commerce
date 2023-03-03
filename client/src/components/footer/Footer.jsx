@@ -3,7 +3,7 @@ import React from "react";
 const Footer = () => {
   return (
     <>
-      <footer className="text-center text-lg-start bg-light text-muted">
+      <footer className="text-center text-lg-start bg-light text-muted" style={{fontSize: 14}}>
         <section className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
           <div className="me-5 d-none d-lg-block">
             <span>Get connected with us on social networks:</span>
@@ -38,61 +38,94 @@ const Footer = () => {
                   <i className="fas fa-gem me-3"></i>Flipkart
                 </h6>
                 <p>
-                  Here you can use rows and columns to organize your footer
-                  content. Lorem ipsum dolor sit amet, consectetur adipisicing
-                  elit.
+                 An E-commerce website.
                 </p>
               </div>
               <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                <h6 className="text-uppercase fw-bold mb-4">Products</h6>
+                <h6 className="text-uppercase fw-bold mb-4">About</h6>
                 <p>
                   <a href="#!" className="text-reset">
-                    Angular
+                    About Us
                   </a>
                 </p>
                 <p>
                   <a href="#!" className="text-reset">
-                    React
+                    Contact Us
                   </a>
                 </p>
                 <p>
                   <a href="#!" className="text-reset">
-                    Vue
+                    Careers
                   </a>
                 </p>
                 <p>
                   <a href="#!" className="text-reset">
-                    Laravel
+                    Corporate Information
                   </a>
                 </p>
               </div>
               <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                <h6 className="text-uppercase fw-bold mb-4">Useful links</h6>
+                <h6 className="text-uppercase fw-bold mb-4">Help</h6>
                 <p>
                   <a href="#!" className="text-reset">
-                    Pricing
+                    Payments
                   </a>
                 </p>
                 <p>
                   <a href="#!" className="text-reset">
-                    Settings
+                    Shipping
                   </a>
                 </p>
                 <p>
                   <a href="#!" className="text-reset">
-                    Orders
+                    Cancellation &amp; Returns
                   </a>
                 </p>
                 <p>
                   <a href="#!" className="text-reset">
-                    Help
+                    FAQ
+                  </a>
+                </p>
+              </div>
+
+              <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                <h6 className="text-uppercase fw-bold mb-4">Policy</h6>
+                <p>
+                  <a href="#!" className="text-reset">
+                    Return Policy
+                  </a>
+                </p>
+                <p>
+                  <a href="#!" className="text-reset">
+                    Terms of Use
+                  </a>
+                </p>
+                <p>
+                  <a href="#!" className="text-reset">
+                    Security
+                  </a>
+                </p>
+                <p>
+                  <a href="#!" className="text-reset">
+                    Privacy
                   </a>
                 </p>
               </div>
               <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                 <h6 className="text-uppercase fw-bold mb-4">Contact</h6>
-                <p>
-                  <i className="fas fa-home me-3"></i> New York, NY 10012, US
+                <p style={{textAlign: "jutsify"}}>
+                  <i className="fas fa-home me-3"></i> Flipkart Internet Private Limited,
+Buildings Alyssa, Begonia &
+Clove Embassy Tech Village,
+Outer Ring Road, Devarabeesanahalli Village,
+Bengaluru, 560103,
+Karnataka, India
+<br/>
+CIN : U51109KA2012PTC066107
+<br/>
+Telephone: 044-45614700
+
+
                 </p>
                 <p>
                   <i className="fas fa-envelope me-3"></i>
@@ -112,9 +145,9 @@ const Footer = () => {
           className="text-center p-4"
         style={{backgroundColor: "rgba(0, 0, 0, 0.05)"}}
         >
-          © 2021 Copyright:
+          © 2023 Copyright:
           <a className="text-reset fw-bold" href="https://mdbootstrap.com/">
-            MDBootstrap.com
+            E-commerce website
           </a>
         </div>
       </footer>
