@@ -13,7 +13,7 @@ const responsive = {
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
-    items: 2,
+    items: 1,
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
@@ -56,6 +56,11 @@ const ViewAllButton = styled(Button)`
 const Image = styled("img")({
   width: "auto",
   height: 150,
+  marginBottom: 10,
+  '&:hover': {
+    transform: "scale(1.1)",
+    transition: "0.2s ease-in-out",
+  }
 });
 
 const Text = styled(Typography)`
@@ -99,7 +104,7 @@ const Slide2 = ({ products, title, timer }) => {
         responsive={responsive}
         swipeable={true}
         draggable={false}
-        infinite={true}
+        infinite={false}
         autoPlay={false}
         centerMode={true}
         autoPlaySpeed={1000}
@@ -109,14 +114,14 @@ const Slide2 = ({ products, title, timer }) => {
       >
         {products && products.map((product) => (
           <Link to={`electronicsProduct/${product.id}`} style={{textDecoration: "none"}}>
-            <Box textAlign="center" style={{ padding: "25px 15px" }}>
+            <Box textAlign="center" style={{ padding: "25px 20px" }}>
               <Image src={product.url} alt="product" />
               <Text style={{ fontWeight: 600, color: "#212121" }}>
                 {product.title.shortTitle}
               </Text>
               <Text style={{ color: "#388e3c" }}>{product.discount}</Text>
               <Text style={{ color: "#212121", opacity: ".6" }}>
-                {product.tagline} yO YO
+                {product.tagline}
               </Text>
             </Box>
           </Link>
