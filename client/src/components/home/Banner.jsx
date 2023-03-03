@@ -36,12 +36,12 @@ const Banner = () => {
   return (
     // props from react-multi-carousel
     <Carousel
-      swipeable={false}
+      swipeable={true}
       draggable={false}
       responsive={responsive}
       infinite={true}
       autoPlay={true}
-      autoPlaySpeed={3000}
+      autoPlaySpeed={2500}
       dotListClass="custom-dot-list-style"
       itemClass="carousel-item-padding-40-px"
       containerClass="carousel-container"
