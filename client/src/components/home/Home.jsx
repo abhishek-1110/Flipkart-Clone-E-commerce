@@ -30,8 +30,10 @@ const Home = () => {
   // console.log(products);
   const { products } = useSelector((state) => state.getProducts);
 
-  const { electronicsProducts } = useSelector((state) => state.getElectronicsProducts);
-  
+  const { electronicsProducts } = useSelector(
+    (state) => state.getElectronicsProducts
+  );
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -39,7 +41,6 @@ const Home = () => {
     dispatch(getElectronicsProducts());
   }, [dispatch]);
 
-  
   return (
     <>
       <NavBar />
@@ -47,10 +48,9 @@ const Home = () => {
         <Banner />
         <MidSlide products={products} title="Deal of the Day" timer={true} />
         <MidSection />
-        <Slide products={products} title="Electronic Products" />
-        <Slide products={products} title="Accessories" />
-        <Slide2 products={electronicsProducts} title="Life Savers2 check" />
-
+        {/* <Slide products={products} title="Electronic Products" />
+        <Slide products={products} title="Accessories" /> */}
+        <Slide2 products={electronicsProducts} title="Electronic Gadgets" />
       </Component>
     </>
   );
