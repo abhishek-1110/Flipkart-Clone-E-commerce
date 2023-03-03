@@ -42,7 +42,7 @@ export const navData = [
 export const bannerData = [
   {
     id: 0,
-    url: "https://rukminim1.flixcart.com/fk-p-flap/3376/560/image/2f298a1fe90c08a2.jpg?q=50",
+    url: "https://rukminim1.flixcart.com/fk-p-flap/3376/560/image/1a326d2f48aaedf0.jpg?q=50",
   },
   {
     id: 1,
@@ -60,11 +60,14 @@ export const bannerData = [
     id: 4,
     url: "https://rukminim1.flixcart.com/flap/3376/560/image/f6202f13b6f89b03.jpg?q=50",
   },
-{
-  id: 5,
-  url: "https://rukminim1.flixcart.com/fk-p-flap/3376/560/image/1d2a97eb4cc2cf4e.jpg?q=50"
-}
-
+  {
+    id: 5,
+    url: "https://rukminim1.flixcart.com/fk-p-flap/3376/560/image/1d2a97eb4cc2cf4e.jpg?q=50",
+  },
+  {
+    id: 6,
+    url: "https://rukminim1.flixcart.com/fk-p-flap/3376/560/image/70559663485113a8.jpeg",
+  },
 ];
 
 export const imageURL = [
