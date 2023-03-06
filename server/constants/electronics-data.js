@@ -49,7 +49,7 @@ export const electronicsproducts = [
       title: {
         shortTitle: "Camera for pics",
         longTitle:
-          "Canon EOS M50 Mark II Mirrorless Camera EF-M15-45mm is STM Lens  (Black)",
+          "Canon EOS M50 Mark II Mirrorless Camera EF-M15-45mm is STM Lens (Black)",
       },
       price: {
         mrp: "60,995",
