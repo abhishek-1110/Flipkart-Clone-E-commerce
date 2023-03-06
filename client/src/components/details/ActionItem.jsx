@@ -64,8 +64,8 @@ const ActionItem = ({ product }) => {
     <LeftContainer>
       <Box
         style={{
-          height: 400,
-          width: "350px",
+          height: 500,
+          width: 500,
           textAlign: "center",
           padding: "15px 20px",
           border: "1px solid #f0f0f0",
