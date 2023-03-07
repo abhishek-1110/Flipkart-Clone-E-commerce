@@ -4,7 +4,7 @@ This is a basically a Flipkart clone. This project implements Flipkart's functio
 Flipkart-Clone-E-commerce
 
 # Home Page 
-![Home Page](https://user-images.githubusercontent.com/57557012/222500502-cf6f4d59-d971-4117-9cb7-2d7e7079c5b6.jpeg)
+![Home page](https://user-images.githubusercontent.com/57557012/223333421-c3908cd5-cf29-44a4-9b04-b1838e9d8ca1.jpeg)
 
 
 # Login Dialog
