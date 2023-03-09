@@ -1,4 +1,4 @@
-import { Typography, Box, styled, getFormHelperTextUtilityClasses } from "@mui/material";
+import { Typography, Box, styled } from "@mui/material";
 import { useState, useEffect } from "react";
 
 const Header = styled(Box)`
@@ -72,7 +72,7 @@ const TotalView = ({ cartItems }) => {
         </Typography>
 
         <Typography>
-          Total Amount
+          Total Payable Amount
           <Price component="span">₹{price - discount + 40}</Price>
         </Typography>
 
