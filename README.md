@@ -19,5 +19,5 @@ Flipkart-Clone-E-commerce
 ![Product Details](https://user-images.githubusercontent.com/57557012/222500588-8b4066c7-21ba-42c4-876a-f80faed64c53.jpeg)
 
 
-# Cart
+# Cart Page
 ![Cart](https://user-images.githubusercontent.com/57557012/222500608-84ed0439-435c-42a1-b7e6-745f4e00e76b.jpeg)
