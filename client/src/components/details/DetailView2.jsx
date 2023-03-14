@@ -103,7 +103,7 @@ const DetailView2 = () => {
   const checkingValidPinCode = () => {
     let result = document.getElementById("pincode").value;
 
-    if (result.length == 0) {
+    if (result.length === 0) {
       setDelivery(false);
     }
     if (result.length < 6 || result.length > 6) {
@@ -118,7 +118,7 @@ const DetailView2 = () => {
   };
   return (
     <Component>
-      {loading == false ? (
+      {loading === false ? (
         electronicsProduct &&
         Object.keys(electronicsProduct).length && (
           <Container>
@@ -136,6 +136,7 @@ const DetailView2 = () => {
                 <img
                   src={fassured}
                   style={{ width: 75, marginLeft: 20, verticalAlign: "middle" }}
+                  alt="assured"
                 />
               </Typography>
 

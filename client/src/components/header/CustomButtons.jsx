@@ -6,7 +6,6 @@ import { useState, useContext } from "react";
 import { DataContext } from "../../context/DataProvider";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Profile from "./Profile";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 import { useSelector } from "react-redux";
 

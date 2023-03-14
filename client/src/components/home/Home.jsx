@@ -4,7 +4,6 @@
 // two compoents cant be returned hence wrapped using Fragment: doesn't create any extra node div
 import NavBar from "./NavBar";
 import Banner from "./Banner";
-import Slide from "./Silde";
 import MidSlide from "./MidSlide";
 import MidSection from "./MidSection";
 
