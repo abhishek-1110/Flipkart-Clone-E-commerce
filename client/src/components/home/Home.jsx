@@ -23,13 +23,12 @@ const Component = styled(Box)`
   background: #f2f2f2;
 `;
 
-const Home = () => {
+const Home = (props) => {
   // useSelector to get value
   // const getProducts = useSelector(state => state.getProducts); // this getProduct is from reducer state redux store
   // const { products } = getProducts; // object destructuring
   // console.log(products);
   const { products } = useSelector((state) => state.getProducts);
-
   const { electronicsProducts } = useSelector(
     (state) => state.getElectronicsProducts
   );
@@ -39,8 +38,10 @@ const Home = () => {
   useEffect(() => {
     dispatch(getProducts());
     dispatch(getElectronicsProducts());
+    props.setProgress(30);
   }, [dispatch]);
 
+  props.setProgress(100);
   return (
     <>
       <NavBar />

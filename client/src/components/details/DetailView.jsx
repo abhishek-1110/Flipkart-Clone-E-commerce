@@ -81,11 +81,10 @@ const DeliveryStatus = styled(Typography)`
 const LocationIcon = styled(LocationOnIcon)`
   
 `
-const DetailView = () => {
+const DetailView = (props) => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { loading, product } = useSelector((state) => state.getProductDetails);
-
   const [delivery, setDelivery] = useState(false);
   const [checkDelivery, setCheckDelivery] = useState(false);
 
@@ -97,7 +96,10 @@ const DetailView = () => {
 
   useEffect(() => {
     if (product && id !== product.id) dispatch(getProductDetails(id));
+        props.setProgress(30);
   }, [dispatch, id, product, loading]);
+
+  props.setProgress(100);
 
   const checkingValidPinCode = () => {
     let result = document.getElementById("pincode").value;
