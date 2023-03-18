@@ -2,7 +2,10 @@ import User from "../model/user-schema.js";
 
 export const userSignup = async (request, response) => {
   try {
-    const exist = await User.findOne({ username: request.body.username });
+    // checking whether the entered email and phone number exists in DB or not
+    let exist = await User.findOne({ email: request.body.email });
+    exist = await User.findOne({ phone: request.body.phone });
+
     if (exist) {
       return response.status(401).json({ message: "User already exist" });
     }
@@ -33,19 +36,26 @@ export const userSignup = async (request, response) => {
 // };
 
 export const userLogin = async (request, response) => {
+  // finding for user data using email and password
   try {
     let user = await User.findOne({
-      username: request.body.username,
+      email: request.body.email,
       password: request.body.password,
     });
+    
+    // console.log("Here", user);
+    
+    // const loggedInUserName = user.firstname; 
+    // console.log(loggedInUserName);
+
     if (user) {
       return response
         .status(200)
-        .json(`${request.body.username} login successfull`);
+        .json(`${user.firstname}`);
     } else {
       return response.status(401).json("Invalid Login");
     }
   } catch (error) {
-    response.json("Error: ", error.message);
+    return response.status(401).json({error});
   }
 };
