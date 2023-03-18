@@ -24,23 +24,21 @@ function App() {
   return (
     <DataProvider>
       <BrowserRouter>
-        <LoadingBar
-            color="#f11946"
-            height={3}
-            progress={progress}
-        />
+        <LoadingBar color="#f1ee8e" height={3} progress={progress} />
         <Header />
         <Box style={{ marginTop: 54 }}>
           <Routes>
-            <Route path="/" element={<Home setProgress = {setProgress}/>} />
+            <Route path="/" element={<Home setProgress={setProgress} />} />
             {/* <Route path="/product/:id" element={<DetailView />} /> */}
-            <Route path="/product/:id" element={<DetailView  setProgress = {setProgress}/>} />
+            <Route
+              path="/product/:id"
+              element={<DetailView setProgress={setProgress} />}
+            />
             <Route path="/electronicsProduct/:id" element={<DetailView2 />} />
             <Route path="/cart" element={<Cart />} />
           </Routes>
         </Box>
-        <Footer/>
-
+        <Footer />
       </BrowserRouter>
     </DataProvider>
   );
