@@ -23,6 +23,7 @@ const Profile = ({ account, setAccount }) => {
   `;
 
   const logoutUser = () => {
+    localStorage.removeItem("loggedinUser");
     setAccount("");
   };
   return (
