@@ -10,6 +10,7 @@ import {
 import React, { useState, useContext, useEffect } from "react";
 import { authenticateSignup, authenticateLogin } from "../../service/api";
 import { DataContext } from "../../context/DataProvider";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Component = styled(Box)`
   height: 70vh;
@@ -130,6 +131,7 @@ const LoginDialog = ({ open, setOpen }) => {
   // for phone
   const [phoneError, setphoneError] = useState(false);
 
+  const [loading, setloading] = useState(false);
   const handleClose = () => {
     setOpen(false);
     showError(false);
@@ -148,16 +150,19 @@ const LoginDialog = ({ open, setOpen }) => {
 
   const onInputChange = (e) => {
     setSignup({ ...signup, [e.target.name]: e.target.value });
-    setAlreadyExists("");
+    setAlreadyExists(false);
+    showError(false);
+    setpasswordmismatches(false);
+    phoneError(false);
   };
-
-  let passWordIndicator = false;
 
   const [alreadyExists, setAlreadyExists] = useState(false);
 
+  const [passwordmismatches, setpasswordmismatches] = useState(false);
+
   const signupUser = async () => {
-    console.log(signup);
-    // to show error when password doesn't matches
+    //  console.log(signup);
+    setloading(true);
 
     try {
       // console.log(signup.firstname);
@@ -168,23 +173,37 @@ const LoginDialog = ({ open, setOpen }) => {
         signup.confirmpassword.length === 0
       ) {
         showError(true);
+        setloading(false);
         return;
       }
 
+      // to show error when password doesn't matches
+
+      if (signup.password !== signup.confirmpassword) {
+        alert("Password doesn't match");
+        setpasswordmismatches(true);
+        setloading(false);
+        return;
+      }
 
       if (signup.phone.length < 10 || signup.phone.length > 10) {
-         setphoneError(true);
-         return;
+        setphoneError(true);
+        setloading(false);
+        return;
       }
+
+      
 
       let response = await authenticateSignup(signup);
 
       if (response === 401 || response === 500) {
         // console.log("Already exists");
         setAlreadyExists(true);
+        setloading(false);
         return;
       }
 
+      setloading(false);
       //console.log(response.data);
       handleClose();
       setAccount(signup.firstname);
@@ -204,17 +223,23 @@ const LoginDialog = ({ open, setOpen }) => {
   };
 
   const loginUser = async () => {
+    // checks
+    if (login.email.length === 0 || login.email.password === 0) {
+      showError(true);
+      return;
+    }
+    setloading(true);
     let response = await authenticateLogin(login);
     // console.log("Front end", response.data);
     if (response === 401) {
       showError(true);
-      return;
     } else {
       showError(false);
       handleClose();
       setAccount(response.data);
       localStorage.setItem("loggedinUser", response.data);
     }
+    setloading(false);
   };
 
   useEffect(() => {
@@ -265,7 +290,8 @@ const LoginDialog = ({ open, setOpen }) => {
                 By continuing, you agree to Flipkart's Terms of Use and Privacy
                 Policy.
               </Text>
-              <LoginButton onClick={() => loginUser()}>Login</LoginButton>
+              <LoginButton onClick={() => loginUser()} >
+              {loading ? <CircularProgress color="inherit"/> : "Login"}</LoginButton>
               <Typography style={{ textAlign: "center" }}>OR</Typography>
               <RequestOTP>Request OTP</RequestOTP>
               <CreateAccount onClick={() => toggleSignup()}>
@@ -302,9 +328,9 @@ const LoginDialog = ({ open, setOpen }) => {
                 type="number"
                 required
               />
-              {phoneError && (
+              {phoneError && 
                 <Error>Please enter valid 10 digit phone number.</Error>
-              )}
+              }
 
               <TextField
                 id="standard-basic"
@@ -327,14 +353,19 @@ const LoginDialog = ({ open, setOpen }) => {
                 required
               />
 
-              {passWordIndicator && error && (
+              {passwordmismatches && 
                 <Error>Password doesn't match.</Error>
+              }
+
+              {alreadyExists && (
+                <Error>Email or Phone Number already exists.</Error>
               )}
 
-              {alreadyExists && <Error>Email or Phone Number already exists.</Error>}
               {error && <Error>One or more field(s) are empty.</Error>}
 
-              <LoginButton onClick={() => signupUser()}>Continue</LoginButton>
+              <LoginButton onClick={() => signupUser()}>
+                {loading ? <CircularProgress color="inherit" /> : "Continue"}
+              </LoginButton>
               <CreateAccount onClick={() => toggleLogin()}>
                 Already have an account? Login
               </CreateAccount>
