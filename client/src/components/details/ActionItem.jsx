@@ -11,8 +11,13 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/actions/cartActions";
 
 import { payUsingPaytm } from "../../service/api";
-
+import React from "react";
 import { post } from "../../utils/paytm";
+
+// snackbar
+import Snackbar from "@mui/material/Snackbar";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 
 const LeftContainer = styled(Box)(({ theme }) => ({
   minWidth: "40%",
@@ -23,11 +28,10 @@ const LeftContainer = styled(Box)(({ theme }) => ({
 }));
 
 const Image = styled("img")({
-  width:"100%",
-  height:"100%",
+  width: "100%",
+  height: "100%",
   objectFit: "contain",
   padding: 15,
-
 });
 
 const StyledButton = styled(Button)`
@@ -49,16 +53,52 @@ const ActionItem = ({ product }) => {
   };
 
   const buyNow = async () => {
-    let response = await payUsingPaytm({
-      amount: 500,
-      email: "abhishkbhi@gmail.com",
-    });
-    let information = {
-      action: "https://securegw-stage.paytm.in/order/process",
-      params: response,
-    };
-    post(information);
+    if (localStorage.getItem("loggedinUser")) {
+      let response = await payUsingPaytm({
+        amount: 500,
+        email: "abhishkbhi@gmail.com",
+      });
+      let information = {
+        action: "https://securegw-stage.paytm.in/order/process",
+        params: response,
+      };
+      post(information);
+    } else {
+      // calling handleClick to show snackbar if user is not logged in
+      handleClick();
+    }
   };
+
+  // for snackbar
+  const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const action = (
+    <React.Fragment>
+      <Button color="secondary" size="small" onClick={handleClose}>
+        UNDO
+      </Button>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </React.Fragment>
+  );
 
   return (
     <LeftContainer>
@@ -91,6 +131,14 @@ const ActionItem = ({ product }) => {
           Buy Now
         </StyledButton>
       </Box>
+      {/*To display snackbar */}
+      <Snackbar
+        open={open}
+        autoHideDuration={3000}
+        onClose={handleClose}
+        message="Please log in first"
+        action={action}
+      />
     </LeftContainer>
   );
 };
