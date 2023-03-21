@@ -79,7 +79,13 @@ const Search = () => {
                   onClick={() => setText("")}
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
-                  {product.title.longTitle}
+                  <Box>
+                    <img
+                      src={product.url}
+                      style={{ width: "30px", paddingRight: "10px" }}
+                    />
+                    {product.title.longTitle}
+                  </Box>
                 </Link>
               </ListItem>
             ))}
