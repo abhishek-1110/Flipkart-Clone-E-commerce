@@ -91,6 +91,11 @@ const accountInitialValue = {
     heading: "Looks like you're new here!",
     subHeading: "Sign up with your mobile to get started",
   },
+  // requestOTP: {
+  //   view: "requestOTP",
+  //   heading: "OTP",
+  //   subHeading: "requestOTP"
+  // }
 };
 
 const signUpInitialValues = {
@@ -113,7 +118,10 @@ const Error = styled(Typography)`
   margin-top: 10px;
   font-weight: bold;
 `;
+
+
 const LoginDialog = ({ open, setOpen }) => {
+
   // for changing the states login and sign up window
   const [account, toggleAccount] = useState(accountInitialValue.login); // states
 
@@ -131,10 +139,13 @@ const LoginDialog = ({ open, setOpen }) => {
   // for phone
   const [phoneError, setphoneError] = useState(false);
 
+  // circular Progress
   const [loading, setloading] = useState(false);
+
   const handleClose = () => {
     setOpen(false);
     showError(false);
+    setloading(false);
     toggleAccount(accountInitialValue.login);
   };
 
@@ -147,6 +158,11 @@ const LoginDialog = ({ open, setOpen }) => {
     showError(false);
     toggleAccount(accountInitialValue.login);
   };
+
+  // const toggleRequestOTP = () => {
+  //   toggleAccount(accountInitialValue.requestOTP);
+
+  // }
 
   const onInputChange = (e) => {
     setSignup({ ...signup, [e.target.name]: e.target.value });
@@ -192,8 +208,6 @@ const LoginDialog = ({ open, setOpen }) => {
         return;
       }
 
-      
-
       let response = await authenticateSignup(signup);
 
       if (response === 401 || response === 500) {
@@ -217,14 +231,14 @@ const LoginDialog = ({ open, setOpen }) => {
   };
 
   const onValueChange = (e) => {
+    setLogin({ ...login, [e.target.name]: e.target.value });
     showError(false);
     setphoneError(false);
-    setLogin({ ...login, [e.target.name]: e.target.value });
   };
 
   const loginUser = async () => {
     // checks
-    if (login.email.length === 0 || login.email.password === 0) {
+    if (login.email.length === 0 || login.password.length === 0) {
       showError(true);
       return;
     }
@@ -238,6 +252,8 @@ const LoginDialog = ({ open, setOpen }) => {
       handleClose();
       setAccount(response.data);
       localStorage.setItem("loggedinUser", response.data);
+      // setting fields as empty again
+      setLogin({ email: "", password : ""});
     }
     setloading(false);
   };
@@ -267,13 +283,12 @@ const LoginDialog = ({ open, setOpen }) => {
             </Typography>
           </Image>
 
-          {account.view === "login" ? (
+          {account.view === "login" && (
             <Wrapper style={{ paddingTop: "0" }}>
               <TextField
                 onChange={(e) => onValueChange(e)}
                 type="email"
                 name="email"
-                id="standard-basic"
                 label="Enter email"
                 variant="standard"
               />
@@ -281,7 +296,6 @@ const LoginDialog = ({ open, setOpen }) => {
               <TextField
                 onChange={(e) => onValueChange(e)}
                 name="password"
-                id="standard-basic"
                 label="Enter Password"
                 variant="standard"
                 type="password"
@@ -290,15 +304,19 @@ const LoginDialog = ({ open, setOpen }) => {
                 By continuing, you agree to Flipkart's Terms of Use and Privacy
                 Policy.
               </Text>
-              <LoginButton onClick={() => loginUser()} >
-              {loading ? <CircularProgress color="inherit"/> : "Login"}</LoginButton>
+              <LoginButton onClick={() => loginUser()}>
+                {loading ? <CircularProgress color="inherit" /> : "Login"}
+              </LoginButton>
               <Typography style={{ textAlign: "center" }}>OR</Typography>
+              {/* <Divider style={{width: "100%", backgroundColor: "#333", marginTop: "15px"}}></Divider> */}
               <RequestOTP>Request OTP</RequestOTP>
               <CreateAccount onClick={() => toggleSignup()}>
                 New to Filpkart? Create an account
               </CreateAccount>
             </Wrapper>
-          ) : (
+          )}
+
+          {account.view === "signup" && (
             <Wrapper style={{ paddingTop: "0" }}>
               <TextField
                 id="standard-basic"
@@ -328,9 +346,9 @@ const LoginDialog = ({ open, setOpen }) => {
                 type="number"
                 required
               />
-              {phoneError && 
+              {phoneError && (
                 <Error>Please enter valid 10 digit phone number.</Error>
-              }
+              )}
 
               <TextField
                 id="standard-basic"
@@ -353,9 +371,7 @@ const LoginDialog = ({ open, setOpen }) => {
                 required
               />
 
-              {passwordmismatches && 
-                <Error>Password doesn't match.</Error>
-              }
+              {passwordmismatches && <Error>Password doesn't match.</Error>}
 
               {alreadyExists && (
                 <Error>Email or Phone Number already exists.</Error>
@@ -371,6 +387,10 @@ const LoginDialog = ({ open, setOpen }) => {
               </CreateAccount>
             </Wrapper>
           )}
+          {/* {account.view === "requestOTP" && <Box>
+
+          OTP thing
+          </Box>} */}
         </Box>
       </Component>
     </Dialog>
