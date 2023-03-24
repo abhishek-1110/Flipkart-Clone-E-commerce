@@ -17,6 +17,7 @@ import DetailView2 from "./components/details/DetailView2";
 
 import LoadingBar from "react-top-loading-bar";
 import { useState } from "react";
+import DeliveryRequest from "./components/pages/DeliveryRequest";
 // import About from "./components/pages/About";
 
 function App() {
@@ -27,7 +28,6 @@ function App() {
       <BrowserRouter>
         <LoadingBar color="#f1ee8e" height={3} progress={progress} />
         <Header />
-        {/* <About/> */}
         <Box style={{ marginTop: 54 }}>
           <Routes>
             <Route path="/" element={<Home setProgress={setProgress} />} />
@@ -38,6 +38,7 @@ function App() {
             />
             <Route path="/electronicsProduct/:id" element={<DetailView2 />} />
             <Route path="/cart" element={<Cart setProgress={setProgress} />} />
+            <Route path="/deliveryForm" element={<DeliveryRequest/>}/>
           </Routes>
         </Box>
         <Footer />
