@@ -67,13 +67,13 @@ const Search = () => {
       </SearchIconWrapper>
 
       {text && (
-        <ListWrapper>
+        <ListWrapper style={{ width: "inherit" }}>
           {products
             .filter((product) =>
               product.title.longTitle.toLowerCase().includes(text.toLowerCase())
             )
             .map((product) => (
-              <ListItem style={{ width: "inherit" }}>
+              <ListItem style={{ width: "100%" }}>
                 <Link
                   to={`/product/${product.id}`}
                   onClick={() => setText("")}
