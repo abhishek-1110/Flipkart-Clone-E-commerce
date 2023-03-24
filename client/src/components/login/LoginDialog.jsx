@@ -169,7 +169,7 @@ const LoginDialog = ({ open, setOpen }) => {
     setAlreadyExists(false);
     showError(false);
     setpasswordmismatches(false);
-    phoneError(false);
+    setphoneError(false);
   };
 
   const [alreadyExists, setAlreadyExists] = useState(false);
