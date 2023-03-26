@@ -1,17 +1,17 @@
 import React, { useRef, useState } from "react";
 import emailjs, { send } from "@emailjs/browser";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import { Box, Button, Typography } from "@mui/material";
 import LoginDialog from "../login/LoginDialog";
 import CircularProgress from "@mui/material/CircularProgress";
 import styled from "@emotion/styled";
+import { removeFromCart } from "../../redux/actions/cartActions";
 
 const DeliveryRequest = () => {
   const form = useRef();
   const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
 
   // styling submit button
   const SubmitButton = styled(Button)`
@@ -28,8 +28,8 @@ const DeliveryRequest = () => {
 
   const sendEmail = (e) => {
     e.preventDefault();
+    setLoading(true);
     if (localStorage.getItem("loggedinUser")) {
-      setLoading(true);
       emailjs
         .sendForm(
           "service_dlzs3xt",
@@ -40,33 +40,49 @@ const DeliveryRequest = () => {
         .then(
           (result) => {
             handleSuccessfulSubmission();
-            console.log(result.text);
+            removeFromCartFun();
+            // console.log(result.text);
           },
           (error) => {
             console.log(error.text);
           }
-        );
+        ); 
       setLoading(false);
-      setOK(false);
     } else {
       setOpen(true);
     }
   };
 
-  const [ok, setOK] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  // getting items from redux store.
+  const { cartItems } = useSelector((state) => state.cart);
+
   const handleSuccessfulSubmission = () => {
     // implement some delay
-    setOK(true);
-    // navigate("/");
-
+    setLoading(true);
     setTimeout(() => {
-      setOK(false);
-    }, 3000);
+      setLoading(false);
+    }, 1500);
+    setTimeout(() => {
+      navigate("/");
+    }, 2000);
     return;
   };
 
-  const { cartItems } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+
+  const removeFromCartFun = () => {
+    let i = 0;
+    while (i < cartItems.length) {
+      cartItems.map((item) => {
+        // console.log(item);
+        dispatch(removeFromCart(item.id));
+      });
+      i++;
+    }
+  };
 
   return (
     <div style={{ padding: 20 }}>
@@ -150,20 +166,25 @@ const DeliveryRequest = () => {
           name="Your products"
           id="outlined-basic"
           variant="filled"
-          value={cartItems.map((item) => {
-            //  console.log(item.title.longTitle);
-            return item.title.longTitle + "\n";
-          })}
+          value={
+            cartItems &&
+            cartItems.map((item) => {
+              //  console.log(item.title.longTitle);
+              return item.title.longTitle + "\n";
+            })
+          }
           multiline={true}
           rows={3}
           readOnly
         ></TextField>
 
         <SubmitButton style={{ marginTop: 20 }} type="submit">
-          {loading === true ? <CircularProgress color="inherit"/> : "Place Order"}
+          {loading ? <CircularProgress color="inherit" /> : "Place Order"}
           {/* <input style = {{outline: "none"}}type="submit" value={cirularProgress ? <CircularProgress/> : "Submit"} style={{ marginTop: 20 }}/> */}
         </SubmitButton>
-        {ok && <h6>Your order has been placed</h6>}
+        {loading && (
+          <h6 style={{ textAlign: "center" }}>Your order has been placed</h6>
+        )}
       </form>
       <LoginDialog open={open} setOpen={setOpen}></LoginDialog>
     </div>
