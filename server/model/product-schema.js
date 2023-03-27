@@ -15,6 +15,7 @@ const productSchema = new mongoose.Schema({
   description: String,
   discount: String,
   tagline: String,
+  seller: String,
 });
 
 // product in parameter is database name inside monogodb
