@@ -4,16 +4,12 @@ const Component = styled(ButtonGroup)`
   margin-top: 30px;
 `;
 
-const styledButton = styled(Button)`
-  border-radius: 50%;
-`;
-
-const GroupedButton = () => {
+const GroupedButton = ({quantity, setIncrease, setDecrease}) => {
   return (
     <Component>
-      <Button style={{ borderRadiusLeft: "50%" }}>-</Button>
-      <Button>1</Button>
-      <Button style={{ borderRadiusRight: "50%" }}>+</Button>
+      <Button style={{ borderRadiusLeft: "50%" }} onClick={()=> {setDecrease()}}>-</Button>
+      <Button>{quantity}</Button>
+      <Button style={{ borderRadiusRight: "50%" }} onClick={()=> {setIncrease()}}>+</Button>
     </Component>
   );
 };
