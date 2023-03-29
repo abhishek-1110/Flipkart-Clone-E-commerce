@@ -19,6 +19,7 @@ import LoadingBar from "react-top-loading-bar";
 import { useState } from "react";
 import DeliveryRequest from "./components/pages/DeliveryRequest";
 import ErrorPage from "./components/pages/ErrorPage";
+import PrivacyPolicy from "./components/pages/PrivacyPolicy";
 // import About from "./components/pages/About";
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
             <Route path="/cart" element={<Cart setProgress={setProgress} />} />
             <Route path="/deliveryForm" element={<DeliveryRequest/>}/>
             <Route path="*" element={<ErrorPage/>}/>
+            <Route path="/pages/privacypolicy" element={<PrivacyPolicy/>}/>
           </Routes>
         </Box>
         <Footer />

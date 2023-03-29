@@ -106,8 +106,8 @@ const Footer = () => {
                   </a>
                 </p>
                 <p>
-                  <a href="#!" className="text-reset">
-                    Privacy
+                  <a href="/pages/privacypolicy" className="text-reset">
+                    Privacy Policy
                   </a>
                 </p>
               </div>
