@@ -18,6 +18,7 @@ import DetailView2 from "./components/details/DetailView2";
 import LoadingBar from "react-top-loading-bar";
 import { useState } from "react";
 import DeliveryRequest from "./components/pages/DeliveryRequest";
+import ErrorPage from "./components/pages/ErrorPage";
 // import About from "./components/pages/About";
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
             <Route path="/electronicsProduct/:id" element={<DetailView2 />} />
             <Route path="/cart" element={<Cart setProgress={setProgress} />} />
             <Route path="/deliveryForm" element={<DeliveryRequest/>}/>
+            <Route path="*" element={<ErrorPage/>}/>
           </Routes>
         </Box>
         <Footer />
