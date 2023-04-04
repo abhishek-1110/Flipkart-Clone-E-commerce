@@ -20,6 +20,7 @@ import { useState } from "react";
 import DeliveryRequest from "./components/pages/DeliveryRequest";
 import ErrorPage from "./components/pages/ErrorPage";
 import PrivacyPolicy from "./components/pages/PrivacyPolicy";
+import OrderDetails from "./components/details/OrderDetails";
 // import About from "./components/pages/About";
 
 function App() {
@@ -43,6 +44,8 @@ function App() {
             <Route path="/deliveryForm" element={<DeliveryRequest/>}/>
             <Route path="*" element={<ErrorPage/>}/>
             <Route path="/pages/privacypolicy" element={<PrivacyPolicy/>}/>
+            <Route path="/orders/details" element={<OrderDetails/>}/>
+            
           </Routes>
         </Box>
         <Footer />

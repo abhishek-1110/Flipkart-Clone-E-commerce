@@ -9,7 +9,7 @@ import Profile from "./Profile";
 
 import { useSelector } from "react-redux";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const BoxWrapper = styled(Box)`
   display: flex;
   justify-content: space-between;
@@ -43,6 +43,11 @@ const LoginButton = styled(Button)`
   }
 `;
 
+const MyOrders = styled(Box)`
+  font-weight: 600;
+  cursor: pointer;
+`;
+
 const Cart = styled(ShoppingCartIcon)`
   cursor: pointer;
   vertical-align: middle;
@@ -62,8 +67,13 @@ const CustomButtons = () => {
     setOpen(true);
   };
 
+  const navigate = useNavigate();
+  const handleMyOrders = () => {
+    navigate("/orders/details");
+  };
+
   return (
-    <BoxWrapper style={{display: "flex", justifyContent:"space-between"}}>
+    <BoxWrapper style={{ display: "flex", justifyContent: "space-between" }}>
       {account ? (
         <Profile account={account} setAccount={setAccount} />
       ) : (
@@ -71,31 +81,33 @@ const CustomButtons = () => {
           Login
         </LoginButton>
       )}
-      <div style={{justifyContent: "space-between"}}>
-      <NavigateCart
-        to="/cart"
-        style={{
-          fontWeight: 600,
-          cursor: "pointer",
-          color: "#fff",
-          textDecoration: "none",
-        }}
-      >
-        <Badge badgeContent={cartItems?.length} color="secondary">
-          <Cart />
-        </Badge>
-        <Typography
+      <div style={{ justifyContent: "space-between" }}>
+        <NavigateCart
+          to="/cart"
           style={{
             fontWeight: 600,
             cursor: "pointer",
-            whiteSpace: "nowrap",
-            marginLeft: 6,
+            color: "#fff",
+            textDecoration: "none",
           }}
         >
-          Cart
-        </Typography>
-      </NavigateCart>
+          <Badge badgeContent={cartItems?.length} color="secondary">
+            <Cart />
+          </Badge>
+          <Typography
+            style={{
+              fontWeight: 600,
+              cursor: "pointer",
+              whiteSpace: "nowrap",
+              marginLeft: 6,
+            }}
+          >
+            Cart
+          </Typography>
+        </NavigateCart>
       </div>
+      {account && <MyOrders onClick={handleMyOrders}>My Orders</MyOrders>}
+
       <LoginDialog open={open} setOpen={setOpen} />
     </BoxWrapper>
   );
