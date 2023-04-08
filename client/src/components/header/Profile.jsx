@@ -2,6 +2,8 @@ import { Box, Menu, MenuItem, Typography, styled } from "@mui/material";
 import { useState } from "react";
 
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
+import { removeFromCart } from "../../redux/actions/cartActions";
+import { useDispatch, useSelector } from "react-redux";
 
 const Component = styled(Menu)`
   margintop: 5px;
@@ -22,10 +24,19 @@ const Profile = ({ account, setAccount }) => {
     margin-left: 20px;
   `;
 
+  const { cartItems } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  
   const logoutUser = () => {
     localStorage.removeItem("loggedinUser");
+    localStorage.removeItem("authToken");
     setAccount("");
+
+    for (let i = 0; i < cartItems.length; i++) {
+      dispatch(removeFromCart(cartItems[i].id));
+    }
   };
+  
   return (
     <>
       <Box onClick={handleClick}>
