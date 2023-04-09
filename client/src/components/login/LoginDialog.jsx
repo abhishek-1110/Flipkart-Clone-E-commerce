@@ -8,10 +8,15 @@ import {
 } from "@mui/material";
 
 import React, { useState, useContext, useEffect } from "react";
-import { authenticateSignup, authenticateLogin } from "../../service/api";
+import {
+  authenticateSignup,
+  authenticateLogin,
+  getCartDetails,
+} from "../../service/api";
 import { DataContext } from "../../context/DataProvider";
 import CircularProgress from "@mui/material/CircularProgress";
-
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/actions/cartActions";
 const Component = styled(Box)`
   height: 70vh;
   width: 90vh;
@@ -119,9 +124,7 @@ const Error = styled(Typography)`
   font-weight: bold;
 `;
 
-
 const LoginDialog = ({ open, setOpen }) => {
-
   // for changing the states login and sign up window
   const [account, toggleAccount] = useState(accountInitialValue.login); // states
 
@@ -217,11 +220,13 @@ const LoginDialog = ({ open, setOpen }) => {
         return;
       }
 
+      console.log("Signup response", response);
       setloading(false);
       //console.log(response.data);
       handleClose();
       setAccount(signup.firstname);
-      localStorage.setItem("loggedinUser", signup.firstname);
+      localStorage.setItem("loggedinUser", response.data.username);
+      localStorage.setItem('authToken', response.data.authToken);
       if (!response) return;
       else {
       }
@@ -250,12 +255,27 @@ const LoginDialog = ({ open, setOpen }) => {
     } else {
       showError(false);
       handleClose();
-      setAccount(response.data);
-      localStorage.setItem("loggedinUser", response.data);
+      console.log("Login data", response.data.username);
+      setAccount(response.data.username);
+      localStorage.setItem("loggedinUser", response.data.username);
+      localStorage.setItem("authToken", response.data.authToken);
+      loadCartItems();
       // setting fields as empty again
-      setLogin({ email: "", password : ""});
+      setLogin({ email: "", password: "" });
     }
     setloading(false);
+  };
+
+  const dispatch = useDispatch();
+
+  const loadCartItems = async () => {
+    let data  = await getCartDetails();
+    console.log("Cart from oon login first", data);
+
+    for (let i = 0; i < data.length; i++) {
+      // console.log(data[i].id);
+        dispatch(addToCart(data[i].id, 1));
+    }
   };
 
   useEffect(() => {

@@ -1,7 +1,7 @@
 import { Box, Button, styled } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FlashOnIcon from "@mui/icons-material/FlashOn";
-import { useState } from "react";
+import {  useState } from "react";
 
 // for routing by clicking on add to cart button
 import { useNavigate } from "react-router-dom";
@@ -47,7 +47,8 @@ const ActionItem = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
   // object desctructring
   const { id } = product;
-  const addItemToCart = () => {
+
+  const addItemToCart =  () => {
     dispatch(addToCart(id, quantity));
     navigate("/cart");
   };

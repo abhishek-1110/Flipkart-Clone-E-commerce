@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import emailjs, { send } from "@emailjs/browser";
+import React, { useRef, useState, useEffect } from "react";
+import emailjs from "@emailjs/browser";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
@@ -46,7 +46,7 @@ const DeliveryRequest = () => {
           (error) => {
             console.log(error.text);
           }
-        ); 
+        );
       setLoading(false);
     } else {
       setOpen(true);
@@ -78,11 +78,17 @@ const DeliveryRequest = () => {
     while (i < cartItems.length) {
       cartItems.map((item) => {
         // console.log(item);
-        dispatch(removeFromCart(item.id));
+        return dispatch(removeFromCart(item.id));
       });
       i++;
     }
   };
+
+  useEffect(() => {
+    if (!localStorage.getItem("loggedinUser")) {
+      navigate("/");
+    }
+  });
 
   return (
     <div style={{ padding: 20 }}>

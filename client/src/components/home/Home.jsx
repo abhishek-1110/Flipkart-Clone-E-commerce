@@ -17,17 +17,23 @@ import { useDispatch, useSelector } from "react-redux"; // hooks
 import Slide2 from "./Slide2";
 
 import { getElectronicsProducts } from "../../redux/actions/electronicsProductActions";
+import { saveCartDetails } from "../../service/api";
+
+
 const Component = styled(Box)`
   padding: 10px 10px;
   background: #f2f2f2;
 `;
 
 const Home = (props) => {
+
   // useSelector to get value
   // const getProducts = useSelector(state => state.getProducts); // this getProduct is from reducer state redux store
   // const { products } = getProducts; // object destructuring
   // console.log(products);
   const { products } = useSelector((state) => state.getProducts);
+
+  
   const { electronicsProducts } = useSelector(
     (state) => state.getElectronicsProducts
   );
@@ -38,6 +44,7 @@ const Home = (props) => {
     dispatch(getProducts());
     dispatch(getElectronicsProducts());
     props.setProgress(30);
+
   }, [dispatch]);
 
   props.setProgress(100);

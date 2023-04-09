@@ -41,11 +41,10 @@ function App() {
             />
             <Route path="/electronicsProduct/:id" element={<DetailView2 />} />
             <Route path="/cart" element={<Cart setProgress={setProgress} />} />
-            <Route path="/deliveryForm" element={<DeliveryRequest/>}/>
-            <Route path="*" element={<ErrorPage/>}/>
-            <Route path="/pages/privacypolicy" element={<PrivacyPolicy/>}/>
-            <Route path="/orders/details" element={<OrderDetails/>}/>
-            
+            <Route path="/deliveryForm" element={<DeliveryRequest />} />
+            <Route path="/pages/privacypolicy" element={<PrivacyPolicy />} />
+            <Route path="/orders/details" element={<OrderDetails />} />
+            <Route path="*" element={<ErrorPage />} />
           </Routes>
         </Box>
         <Footer />

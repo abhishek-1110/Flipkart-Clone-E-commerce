@@ -4,6 +4,8 @@ import ButtonGroup from "./ButtonGroup";
 import { removeFromCart } from "../../redux/actions/cartActions";
 
 import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { removeCartItems } from "../../service/api";
 
 const Component = styled(Box)`
   border-top: 1px solid #f0f0f0;
@@ -15,7 +17,6 @@ const LeftComponent = styled(Box)`
   margin: 20px;
   display: flex;
   flex-direction: column;
- 
 `;
 
 const SmallText = styled(Box)`
@@ -25,31 +26,59 @@ const SmallText = styled(Box)`
 `;
 
 const Remove = styled(Button)`
-    marginTop: 20px;
-    font-size: 16px;
-    color: #000;
-    font-weight: 600;
-`
+  margintop: 20px;
+  font-size: 16px;
+  color: #000;
+  font-weight: 600;
+`;
 
 const CartItem = ({ item }) => {
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch();
-
-    const removeItemFromCart = (id)=> {
-        dispatch(removeFromCart(id));
+  const removeItemFromCart = async (id) => {
+    dispatch(removeFromCart(id));
+    try {
+      let data = await removeCartItems(id);
+      console.log("Delete front end", data);
+    } catch(error) {
+      console.log("Error while deleting front end,,,", error);
     }
+  };
+
+  const [quantity, setQuantity] = useState(1);
+
+  const setIncrease = () => {
+    if (quantity < 5) {
+      setQuantity(quantity + 1);
+    } else {
+      console.log("Limit exceeded...");
+    }
+  };
+
+  const setDecrease = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    } else {
+      console.log("Can't reduce beyond 1");
+    }
+  };
 
   return (
     <Component>
       <LeftComponent>
-        <img src={item.url} alt="product" style={{height: 110, width: 110}}/>
-        <ButtonGroup/>
+        <img src={item.url} alt="product" style={{ height: 110, width: 110 }} />
+        {/* <ButtonGroup
+          quantity={quantity}
+          setIncrease={setIncrease}
+          setDecrease={setDecrease}
+          productID={item.id}
+        ></ButtonGroup> */}
       </LeftComponent>
-      <Box style = {{margin: 20}}>
+      <Box style={{ margin: 20 }}>
         <Typography>{addEllipsis(item.title.longTitle)}</Typography>
-        <SmallText>Seller: RetailNet</SmallText>
-        <Typography style = {{margin: '10px 0px'}}>
-          <Box component="span" style={{ fontWeight: 600, fontSize: "18px"}}>
+        <SmallText>Seller: {item.seller}</SmallText>
+        <Typography style={{ margin: "10px 0px" }}>
+          <Box component="span" style={{ fontWeight: 600, fontSize: "18px" }}>
             ₹{item.price.cost}
           </Box>
           &nbsp;&nbsp;&nbsp;
@@ -62,7 +91,7 @@ const CartItem = ({ item }) => {
           </Box>
         </Typography>
 
-        <Remove onClick={()=> removeItemFromCart(item.id)}>Remove</Remove>
+        <Remove onClick={() => removeItemFromCart(item.id)}>Remove</Remove>
       </Box>
     </Component>
   );

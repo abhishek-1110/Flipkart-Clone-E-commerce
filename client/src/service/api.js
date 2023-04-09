@@ -23,18 +23,61 @@ export const authenticateLogin = async (user) => {
 
 export const getProductById = async (id) => {
   try {
-      return await axios.get(`${url}/product/${id}`);
+    return await axios.get(`${url}/product/${id}`);
   } catch (error) {
-      console.log('Error while getting product by id response', error);
+    console.log("Error while getting product by id response", error);
   }
-}
+};
 
 export const payUsingPaytm = async (data) => {
   try {
-      let response = await axios.post(`${url}/payment`, data);
-      console.log(response.data);
-      return response.data;
+    let response = await axios.post(`${url}/payment`, data);
+    console.log(response.data);
+    return response.data;
   } catch (error) {
-      console.log('Error while calling payment api', error);
+    console.log("Error while calling payment api", error);
   }
-}
+};
+
+export const saveCartDetails = async (data) => {
+  try {
+    let response = await axios.post(`${url}/cart/savedetails`, data, {
+      headers: {
+        Authorization:
+          localStorage.getItem('authToken'),
+      },
+    });
+    console.log("API save cart Details", response);
+  } catch (error) {
+    console.log("some error while saving cart info", error);
+  }
+};
+
+export const getCartDetails = async () => {
+  try {
+    let response = await axios.get(`${url}/cart/getdetails`, {
+      headers: {
+        Authorization:
+          localStorage.getItem('authToken'),
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log("Error while fetching details", error);
+  }
+};
+
+export const removeCartItems = async (id) => {
+  try {
+    let response = await axios.delete(`${url}/cart/removefromcart/${id}`, {
+      headers: {
+        Authorization:
+          localStorage.getItem('authToken'),
+      },
+    });
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log("API error", error);
+  }
+};

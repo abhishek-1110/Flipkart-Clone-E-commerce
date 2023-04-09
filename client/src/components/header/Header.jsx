@@ -4,6 +4,7 @@ import { AppBar, Toolbar, Box, styled, Typography } from "@mui/material";
 import Search from "./Search";
 import CustomButtons from "./CustomButtons";
 import { Link } from "react-router-dom";
+import logo from '../../images/AceCart.png';
 // handling css
 const StyledHeader = styled(AppBar)`
   background: #2874f0;
@@ -42,7 +43,7 @@ const Header = () => {
     <StyledHeader>
       <Toolbar style={{ minHeight: 55 }}>
         <Component to ='/' style={{textDecoration:"none", color: "inherit"}}>
-          <img src={logoURL} alt="logo" style={{ width: 75 }} />
+          <img src={logo} alt="logo" style={{ width: 75 }} />
           <Box style={{ display: "flex" }}>
             <SubHeading>
               Explore&nbsp;

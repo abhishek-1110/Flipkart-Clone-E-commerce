@@ -29,13 +29,17 @@ const Component = styled(Box)`
   background: #f2f2f2;
   margin-top: 55px;
 `;
+
 const Container = styled(Grid)(({ theme }) => ({
   background: "#fff",
   display: "flex",
   [theme.breakpoints.down('md')]: {
-    margin: 0
+    margin: 0,
+    flexDirection: "column",
+    padding: "10px",
   }
 }))
+
 
 const RightContainer = styled(Grid)`
   margin-top: 50px;
@@ -52,12 +56,6 @@ const LocalOffer = styled(LocalOfferIcon)`
   color: #388e3c;
   font-size: 12px;
   margin-right: 4px;
-`;
-
-const InputField = styled("input")`
-  label {
-    font-size: 14px;
-  }
 `;
 
 const TableData = styled(TableCell)`
@@ -104,7 +102,7 @@ const DetailView = (props) => {
   const checkingValidPinCode = () => {
     let result = document.getElementById("pincode").value;
 
-    if (result.length == 0) {
+    if (result.length === 0) {
       setDelivery(false);
     }
     if (result.length < 6 || result.length > 6) {
@@ -134,6 +132,7 @@ const DetailView = (props) => {
               8 Ratings &amp; 1 review
               <img
                 src={fassured}
+                alt="assured"
                 style={{ width: 75, marginLeft: 20, verticalAlign: "middle" }}
               />
             </Typography>
@@ -228,7 +227,7 @@ const DetailView = (props) => {
                       <Box>
                         <form>
                           <input
-                            type={Text}
+                            type="number"
                             id="pincode"
                             style={{
                               border: "none",
@@ -267,7 +266,7 @@ const DetailView = (props) => {
 
                 <TableRow>
                   <TableData>Seller</TableData>
-                  <TableCell style={{ border: "none" }}></TableCell>
+                  <TableCell style={{ border: "none" }}>{product.seller}</TableCell>
                 </TableRow>
 
                 <TableRow>

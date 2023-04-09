@@ -1,11 +1,14 @@
 import { Typography, Grid, Box, Button, styled } from "@mui/material";
 import { useSelector } from "react-redux";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // compoenent
 import CartItem from "./CartItem";
 import TotalView from "./TotalView";
 import EmptyCart from "./EmptyCart";
-import { payUsingPaytm } from "../../service/api";
+import {
+  payUsingPaytm,
+  saveCartDetails,
+} from "../../service/api";
 import { post } from "../../utils/paytm";
 // snackbar
 import Snackbar from "@mui/material/Snackbar";
@@ -39,7 +42,7 @@ const ButtonWrapper = styled(Box)`
 
 const StyledButton = styled(Button)`
   display: flex;
-  ${'' /* margin-left: auto; */}
+  ${"" /* margin-left: auto; */}
 
   background-color: #fb641b;
   color: #fff;
@@ -75,13 +78,28 @@ const Cart = (props) => {
     setOpen(false);
   };
 
+  const { cartItems } = useSelector((state) => state.cart);
+
+  useEffect(() => {
+    try {
+      // console.log("CartItems length from Cart load: ", cartItems.length);
+      if (localStorage.getItem("loggedinUser")) {
+        for (let i = 0; i < cartItems.length; i++) {
+          // console.log("Items", cartItems[i]);
+          saveCartDetails(cartItems[i]);
+        }
+      }
+    } catch (error) {
+      console.log("Front end error", error);
+    }
+  }, [cartItems]);
+
   let navigate = useNavigate();
   const handleDeliveryRequestPage = () => {
-    if (localStorage.getItem("loggedinUser"))  
-        navigate("/deliveryForm")
-    else 
-    setOpen(true);
-  }
+    if (localStorage.getItem("loggedinUser")) navigate("/deliveryForm");
+    else setOpen(true);
+  };
+
   const action = (
     <React.Fragment>
       <Button color="primary" size="small" onClick={handleClose}>
@@ -97,7 +115,7 @@ const Cart = (props) => {
       </IconButton>
     </React.Fragment>
   );
-  const { cartItems } = useSelector((state) => state.cart);
+
   props.setProgress(100);
   const checkLogin = async () => {
     if (localStorage.getItem("loggedinUser")) {
@@ -115,7 +133,6 @@ const Cart = (props) => {
     }
   };
 
-
   return (
     <>
       {/*To display snackbar */}
@@ -127,37 +144,16 @@ const Cart = (props) => {
         action={action}
       />
 
-      {/* {localStorage.getItem("cart") &&
-        <Container container>
-          <LeftComponent item lg={9} md={9} sm={12} xs={12}>
-            <Header>
-              <Typography>My Cart ({JSON.stringify("cart").length})</Typography>
-            </Header>
-            {JSON.parse(localStorage.getItem("cart")).map((item) => (
-              <CartItem item={item} />
-            ))}
-            <ButtonWrapper>
-              <StyledButton onClick={() => checkLogin()}>
-                Place Order
-              </StyledButton>
-            </ButtonWrapper>
-          </LeftComponent>
-          <TotalView
-            cartItems={JSON.parse(localStorage.getItem("cart"))}
-          ></TotalView>
-        </Container>
-      } */}
-
-      { cartItems.length ? (
+      {cartItems.length ? (
         <Container container>
           <LeftComponent item lg={9} md={9} sm={12} xs={12}>
             <Header>
               <Typography>My Cart ({cartItems.length})</Typography>
             </Header>
             {cartItems.map((item) => (
-              <CartItem item={item} />
+              <CartItem item={item} key = {item.id}/>
             ))}
-            
+
             <ButtonWrapper>
               <StyledButton onClick={() => checkLogin()}>
                 Place Order
@@ -175,7 +171,6 @@ const Cart = (props) => {
       ) : (
         <EmptyCart />
       )}
-
     </>
   );
 };
