@@ -43,8 +43,7 @@ export const saveCartDetails = async (data) => {
   try {
     let response = await axios.post(`${url}/cart/savedetails`, data, {
       headers: {
-        Authorization:
-          localStorage.getItem('authToken'),
+        Authorization: localStorage.getItem("authToken"),
       },
     });
     console.log("API save cart Details", response);
@@ -57,8 +56,7 @@ export const getCartDetails = async () => {
   try {
     let response = await axios.get(`${url}/cart/getdetails`, {
       headers: {
-        Authorization:
-          localStorage.getItem('authToken'),
+        Authorization: localStorage.getItem("authToken"),
       },
     });
     return response.data;
@@ -71,13 +69,39 @@ export const removeCartItems = async (id) => {
   try {
     let response = await axios.delete(`${url}/cart/removefromcart/${id}`, {
       headers: {
-        Authorization:
-          localStorage.getItem('authToken'),
+        Authorization: localStorage.getItem("authToken"),
       },
     });
     console.log(response);
     return response;
   } catch (error) {
     console.log("API error", error);
+  }
+};
+
+export const saveOrderDetails = async (data) => {
+  // will get the items from Redux store and save them in backend...
+  try {
+    const response = await axios.post(`${url}/orders/myorders`, data, {
+      headers: {
+        Authorization: localStorage.getItem("authToken"),
+      },
+    });
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getOrderDetails = async () => {
+  try {
+    const response = await axios.get(`${url}/orders/getorders`, {
+      headers: {
+        Authorization: localStorage.getItem("authToken"),
+      },
+    });
+    return response;
+  } catch (error) {
+    console.log(error);
   }
 };
