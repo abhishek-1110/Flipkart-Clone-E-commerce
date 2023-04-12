@@ -255,7 +255,7 @@ const LoginDialog = ({ open, setOpen }) => {
     } else {
       showError(false);
       handleClose();
-      console.log("Login data", response.data.username);
+      // console.log("Login data", response.data.username);
       setAccount(response.data.username);
       localStorage.setItem("loggedinUser", response.data.username);
       localStorage.setItem("authToken", response.data.authToken);
@@ -270,7 +270,7 @@ const LoginDialog = ({ open, setOpen }) => {
 
   const loadCartItems = async () => {
     let data  = await getCartDetails();
-    console.log("Cart from oon login first", data);
+    // console.log("Cart from oon login first", data);
 
     for (let i = 0; i < data.length; i++) {
       // console.log(data[i].id);
