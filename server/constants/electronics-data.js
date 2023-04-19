@@ -9,8 +9,8 @@ export const electronicsproducts = [
         longTitle: "Acer 80 cm (32 inch) HD Ready LED Smart Android TV with Dolby Audio (2022 Modelacer 21.5 inch Full HD IPS Panel White Color Ultra Slim Monitor (HA220Q)  (Frameless, AMD Free Sync, Response Time: 4 ms, 75 Hz Refresh Rate)",
       },
       price: {
-        mrp: "15,700",
-        cost: "8,349",
+        mrp: 15700,
+        cost: 8349,
         discount: "46%",
       },
       quantity: 1,
@@ -30,8 +30,8 @@ export const electronicsproducts = [
         longTitle: "Canon PIXMA MG2470 All-in-One Inkjet Printer (White, Grey, Ink Cartridge)",
       },
       price: {
-        mrp: "3,825",
-        cost: "3,219",
+        mrp: 3825,
+        cost: 3219,
         discount: "15%",
       },
       quantity: 1,
@@ -52,8 +52,8 @@ export const electronicsproducts = [
           "Canon EOS M50 Mark II Mirrorless Camera EF-M15-45mm is STM Lens (Black)",
       },
       price: {
-        mrp: "60,995",
-        cost: "57,990",
+        mrp: 60995,
+        cost: 57990,
         discount: "4%",
       },
       quantity: 1,
@@ -73,9 +73,9 @@ export const electronicsproducts = [
         longTitle: "FUJIFILM Instax Mini 11 Instant Camera (Pink)",
       },
       price: {
-        mrp: "5,999",
-        cost: "5,998",
-        discount: "42%",
+        mrp: 5999,
+        cost: 3998,
+        discount: "76%",
       },
       quantity: 1,
       description:
@@ -94,8 +94,8 @@ export const electronicsproducts = [
         longTitle: "ViewSonic 21.5 Inch Full HD LED Backlit VA Panel with ECO-Mode, HDMI 1.4, ViewMode Technology, Flicker Free, Lowe Blue Light Filter Monitor (VA2215-H) (AMD Free Sync, Response Time: 4 ms, 75 Hz Refresh Rate)",
       },
       price: {
-        mrp: "11,700",
-        cost: "6,999",
+        mrp: 11700,
+        cost: 6999,
         discount: "42%",
       },
       quantity: 1,
@@ -115,8 +115,8 @@ export const electronicsproducts = [
         longTitle: "Lenovo Tab M8 HD (2nd Gen) 2 GB RAM 32 GB ROM 8 inch with Wi-Fi Only Tablet (Iron Grey)",
       },
       price: {
-        mrp: "14,000",
-        cost: "10,499",
+        mrp: 14000,
+        cost: 10499,
         discount: "25%",
       },
       quantity: 1,
