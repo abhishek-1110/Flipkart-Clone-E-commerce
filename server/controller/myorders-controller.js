@@ -6,7 +6,7 @@ export const saveOrders = async (req, res) => {
       id: req.body.id,
       url: req.body.url,
       detailUrl: req.body.url,
-      title: req.body.tilte,
+      title: req.body.title,
       price: req.body.price,
       quantity: req.body.quantity,
       description: req.body.description,
@@ -27,7 +27,7 @@ export const getOrders = async (req, res) => {
   try {
     const orders = await Order.find({ user: req.user.id });
     // console.log("Order details", response);
-    return res.status(200).json({ orders: orders });
+    return res.status(200).json(orders);
   } catch (error) {
     console.log("error while getting order details...", error);
   }
