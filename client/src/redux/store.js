@@ -14,7 +14,7 @@ import { getElectronicsProductsReducer, getElectronicsProductDetailsReducer } fr
 
 import {persistStore, persistReducer } from 'redux-persist'
 import storage from "redux-persist/lib/storage";
-
+import { ordersReducer } from "./reducers/ordersReducer";
 const persisConifg = {
   key: "root",
   storage
@@ -26,6 +26,7 @@ const reducer = combineReducers({
   getElectronicsProducts: getElectronicsProductsReducer,
   getElectronicsProductDetails: getElectronicsProductDetailsReducer,
   cart: cartReducer,
+  order: ordersReducer
 });
 
 const persistedReducer  = persistReducer(persisConifg, reducer);
