@@ -93,15 +93,3 @@ export const saveOrderDetails = async (data) => {
   }
 };
 
-export const getOrderDetails = async () => {
-  try {
-    const response = await axios.get(`${url}/orders/getorders`, {
-      headers: {
-        Authorization: localStorage.getItem("authToken"),
-      },
-    });
-    return response;
-  } catch (error) {
-    console.log(error);
-  }
-};
