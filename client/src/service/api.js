@@ -75,7 +75,7 @@ export const removeCartItems = async (id) => {
     console.log(response);
     return response;
   } catch (error) {
-    console.log("API error", error);
+    console.log("API error while removing cartItems", error);
   }
 };
 
@@ -89,7 +89,6 @@ export const saveOrderDetails = async (data) => {
     });
     console.log(response);
   } catch (error) {
-    console.log(error);
+    console.log("error while saving details", error);
   }
 };
-
