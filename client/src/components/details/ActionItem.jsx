@@ -1,12 +1,12 @@
 import { Box, Button, styled } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FlashOnIcon from "@mui/icons-material/FlashOn";
-import {  useState } from "react";
+import { useState } from "react";
 
 // for routing by clicking on add to cart button
 import { useNavigate } from "react-router-dom";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { addToCart } from "../../redux/actions/cartActions";
 
@@ -48,7 +48,16 @@ const ActionItem = ({ product }) => {
   // object desctructring
   const { id } = product;
 
-  const addItemToCart =  () => {
+  const { cartItems } = useSelector((state) => state.cart);
+
+  const addItemToCart = () => {
+    // checking whether this exisits or not in cart already
+    for (let i = 0; i < cartItems.length; i++) {
+      if (cartItems[i].id === id) {
+        console.log("Already in Cart can't add one item two times....");
+        return;
+      }
+    }
     dispatch(addToCart(id, quantity));
     navigate("/cart");
   };
