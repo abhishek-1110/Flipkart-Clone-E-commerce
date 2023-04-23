@@ -45,6 +45,9 @@ const ActionItem = ({ product }) => {
   const navigate = useNavigate(); // intialization
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
+
+  const [alreadyincart, setalreadyincart] = useState(false);
+
   // object desctructring
   const { id } = product;
 
@@ -55,6 +58,7 @@ const ActionItem = ({ product }) => {
     for (let i = 0; i < cartItems.length; i++) {
       if (cartItems[i].id === id) {
         console.log("Already in Cart can't add one item two times....");
+        setalreadyincart(true);
         return;
       }
     }
@@ -129,8 +133,8 @@ const ActionItem = ({ product }) => {
           style={{ marginRight: 10, background: "#ff9f00" }}
           onClick={() => addItemToCart()}
         >
-          <ShoppingCartIcon style={{ fontSize: "16px" }} />
-          Add to Cart
+           <ShoppingCartIcon style={{ fontSize: "16px" }} />
+          {alreadyincart ? "Already in Cart" : "Add to Cart"}
         </StyledButton>
         <StyledButton
           variant="contained"
