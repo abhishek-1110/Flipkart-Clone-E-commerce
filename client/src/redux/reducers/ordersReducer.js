@@ -9,6 +9,11 @@ export const ordersReducer = (state = { orders: [] }, action) => {
       return { orders: action.payload };
     case actionTypes.GET_ORDERS_FAIL:
       return { error: action.payload };
+    case actionTypes.REMOVE_FROM_ORDERS:
+      return {
+        ...state,
+        orders: [],
+      };
     default:
       return state;
   }

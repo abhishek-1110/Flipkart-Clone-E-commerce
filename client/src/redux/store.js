@@ -26,7 +26,7 @@ const reducer = combineReducers({
   getElectronicsProducts: getElectronicsProductsReducer,
   getElectronicsProductDetails: getElectronicsProductDetailsReducer,
   cart: cartReducer,
-  order: ordersReducer
+  order: ordersReducer,
 });
 
 const persistedReducer  = persistReducer(persisConifg, reducer);

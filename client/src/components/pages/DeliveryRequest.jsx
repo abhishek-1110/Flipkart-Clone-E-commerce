@@ -8,6 +8,7 @@ import LoginDialog from "../login/LoginDialog";
 import CircularProgress from "@mui/material/CircularProgress";
 import styled from "@emotion/styled";
 import { removeFromCart } from "../../redux/actions/cartActions";
+import { saveOrderDetails } from "../../service/api";
 
 const DeliveryRequest = () => {
   const form = useRef();
@@ -90,6 +91,17 @@ const DeliveryRequest = () => {
     }
   });
 
+  const handleDemoButton = async () => {
+    try {
+      for (let i = 0; i < cartItems.length; i++) {
+        let response = await saveOrderDetails(cartItems[i]);
+        console.log("Front delivery request response", response);
+      }
+      navigate("/orders/details");
+    } catch (error) {
+      console.log("Front delivery request error", error);
+    }
+  };
   return (
     <div style={{ padding: 20 }}>
       <h5 style={{ margin: "auto", width: "500px" }}>
@@ -188,6 +200,10 @@ const DeliveryRequest = () => {
           {loading ? <CircularProgress color="inherit" /> : "Place Order"}
           {/* <input style = {{outline: "none"}}type="submit" value={cirularProgress ? <CircularProgress/> : "Submit"} style={{ marginTop: 20 }}/> */}
         </SubmitButton>
+
+        <Button onClick={handleDemoButton}>
+          Demo Button for myOrders screen
+        </Button>
         {loading && (
           <h6 style={{ textAlign: "center" }}>Your order has been placed</h6>
         )}
