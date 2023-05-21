@@ -13,6 +13,7 @@ import { saveOrderDetails } from "../../service/api";
 const DeliveryRequest = () => {
   const form = useRef();
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // styling submit button
   const SubmitButton = styled(Button)`
@@ -30,6 +31,7 @@ const DeliveryRequest = () => {
   const sendEmail = (e) => {
     e.preventDefault();
     setLoading(true);
+    console.log(loading);
     if (localStorage.getItem("loggedinUser")) {
       emailjs
         .sendForm(
@@ -41,7 +43,6 @@ const DeliveryRequest = () => {
         .then(
           (result) => {
             handleSuccessfulSubmission();
-            removeFromCartFun();
             // console.log(result.text);
           },
           (error) => {
@@ -49,26 +50,37 @@ const DeliveryRequest = () => {
           }
         );
       setLoading(false);
+      console.log(loading);
+
     } else {
       setOpen(true);
     }
   };
 
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   // getting items from redux store.
   const { cartItems } = useSelector((state) => state.cart);
 
-  const handleSuccessfulSubmission = () => {
+  const handleSuccessfulSubmission = async () => {
+    try {
+      for (let i = 0; i < cartItems.length; i++) {
+        await saveOrderDetails(cartItems[i]);
+        // console.log("Front delivery request response", response);
+      }
+      removeFromCartFun();
+      navigate("/orders/details");
+    } catch (error) {
+      console.log("Front delivery request error", error);
+    }
     // implement some delay
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 1500);
-    setTimeout(() => {
-      navigate("/");
-    }, 2000);
+    // setLoading(true);
+    // setTimeout(() => {
+    //   setLoading(false);
+    // }, 1500);
+    // setTimeout(() => {
+    //   navigate("/");
+    // }, 2000);
     return;
   };
 
@@ -86,22 +98,24 @@ const DeliveryRequest = () => {
   };
 
   useEffect(() => {
-    if (!localStorage.getItem("loggedinUser")) {
+    if (!localStorage.getItem("loggedinUser") || cartItems.length === 0) {
       navigate("/");
     }
   });
 
-  const handleDemoButton = async () => {
-    try {
-      for (let i = 0; i < cartItems.length; i++) {
-        let response = await saveOrderDetails(cartItems[i]);
-        console.log("Front delivery request response", response);
-      }
-      navigate("/orders/details");
-    } catch (error) {
-      console.log("Front delivery request error", error);
-    }
-  };
+  // const handleDemoButton = async () => {
+  //   try {
+  //     for (let i = 0; i < cartItems.length; i++) {
+  //       await saveOrderDetails(cartItems[i]);
+  //       // console.log("Front delivery request response", response);
+  //     }
+  //     removeFromCartFun();
+  //     navigate("/orders/details");
+  //   } catch (error) {
+  //     console.log("Front delivery request error", error);
+  //   }
+  // };
+
   return (
     <div style={{ padding: 20 }}>
       <h5 style={{ margin: "auto", width: "500px" }}>
@@ -159,6 +173,7 @@ const DeliveryRequest = () => {
           name="user_phone"
           variant="outlined"
           label="Enter Phone Number"
+          type="number"
           required
           style={{ marginTop: 20 }}
         />
@@ -180,7 +195,7 @@ const DeliveryRequest = () => {
           Products ({cartItems.length})
         </Typography>
         <TextField
-          style={{ marginTop: 2 }}
+          style={{ marginTop: 2, }}
           name="Your products"
           id="outlined-basic"
           variant="filled"
@@ -197,13 +212,13 @@ const DeliveryRequest = () => {
         ></TextField>
 
         <SubmitButton style={{ marginTop: 20 }} type="submit">
-          {loading ? <CircularProgress color="inherit" /> : "Place Order"}
+          {loading === true ? <CircularProgress color="inherit" /> : "Place Order"}
           {/* <input style = {{outline: "none"}}type="submit" value={cirularProgress ? <CircularProgress/> : "Submit"} style={{ marginTop: 20 }}/> */}
         </SubmitButton>
 
-        <Button onClick={handleDemoButton}>
+        {/* <Button onClick={handleDemoButton}>
           Demo Button for myOrders screen
-        </Button>
+        </Button> */}
         {loading && (
           <h6 style={{ textAlign: "center" }}>Your order has been placed</h6>
         )}
