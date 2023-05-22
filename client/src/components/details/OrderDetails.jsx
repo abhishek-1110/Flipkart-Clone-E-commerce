@@ -21,27 +21,35 @@ const OrderDetails = () => {
   const dipsatch = useDispatch();
   const { orders } = useSelector((state) => state.order);
   const navigate = useNavigate();
+
+  // for sorting items as per Dates
+  const compareDates = (a, b) => {
+    return new Date(b.date) - new Date(a.date);
+  };
+
+  const sortedItems = [...orders].sort(compareDates);
+
   useEffect(() => {
-    if (!localStorage.getItem('loggedinUser')) {
-        navigate("/");
+    if (!localStorage.getItem("loggedinUser")) {
+      navigate("/");
+    } else {
+      dipsatch(getOrderDetails());
     }
-    dipsatch(getOrderDetails());
-  });
+  }, []);
 
   const Container = styled(Box)`
     margin: 10px 50px;
   `;
   return (
     <Container container>
-    <LeftComponent item lg={9} md={9} sm={12} xs={12}>
-      <Header>
-        <Typography>My orders ({orders.length})</Typography>
-      </Header>
-      {orders.map((item) => (
-        <OrderItem item={item} key = {item.id}/>
-      ))}
-
-    </LeftComponent>
+      <LeftComponent item lg={9} md={9} sm={12} xs={12}>
+        <Header>
+          <Typography>My orders ({orders.length})</Typography>
+        </Header>
+        {sortedItems.map((item) => (
+          <OrderItem item={item} key={item.id} />
+        ))}
+      </LeftComponent>
     </Container>
   );
 };
