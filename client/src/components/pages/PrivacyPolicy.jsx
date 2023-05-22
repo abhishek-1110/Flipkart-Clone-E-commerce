@@ -6,7 +6,7 @@ const PrivacyPolicy = () => {
     <div className="privacy-policy-container">
       <h1 className="privacy-policy-heading">Privacy Policy</h1>
       <p className="privacy-policy-text">
-        At E-kart, we take the privacy of our users very seriously. This privacy policy outlines the types of information we collect, how we use it, and how we protect your personal information.
+        At AceCart, we take the privacy of our users very seriously. This privacy policy outlines the types of information we collect, how we use it, and how we protect your personal information.
       </p>
       <h2 className="privacy-policy-subheading">Information We Collect</h2>
       <p className="privacy-policy-text">
