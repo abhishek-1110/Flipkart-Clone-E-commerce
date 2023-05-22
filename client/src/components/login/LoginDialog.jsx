@@ -17,6 +17,8 @@ import { DataContext } from "../../context/DataProvider";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/actions/cartActions";
+import toast from "react-hot-toast";
+
 const Component = styled(Box)`
   height: 70vh;
   width: 90vh;
@@ -226,7 +228,7 @@ const LoginDialog = ({ open, setOpen }) => {
       handleClose();
       setAccount(signup.firstname);
       localStorage.setItem("loggedinUser", response.data.username);
-      localStorage.setItem('authToken', response.data.authToken);
+      localStorage.setItem("authToken", response.data.authToken);
       if (!response) return;
       else {
       }
@@ -245,6 +247,7 @@ const LoginDialog = ({ open, setOpen }) => {
     // checks
     if (login.email.length === 0 || login.password.length === 0) {
       showError(true);
+      toast.error("Login Failed.");
       return;
     }
     setloading(true);
@@ -252,9 +255,12 @@ const LoginDialog = ({ open, setOpen }) => {
     // console.log("Front end", response.data);
     if (response === 401) {
       showError(true);
+      toast.error("Login Failed.");
     } else {
       showError(false);
       handleClose();
+      // for toastify
+      toast.success("Login Success.");
       // console.log("Login data", response.data.username);
       setAccount(response.data.username);
       localStorage.setItem("loggedinUser", response.data.username);
@@ -269,12 +275,11 @@ const LoginDialog = ({ open, setOpen }) => {
   const dispatch = useDispatch();
 
   const loadCartItems = async () => {
-    let data  = await getCartDetails();
+    let data = await getCartDetails();
     // console.log("Cart from oon login first", data);
-
     for (let i = 0; i < data.length; i++) {
       // console.log(data[i].id);
-        dispatch(addToCart(data[i].id, 1));
+      dispatch(addToCart(data[i].id, 1));
     }
   };
 
@@ -285,7 +290,7 @@ const LoginDialog = ({ open, setOpen }) => {
         // console.log(setAccount);
       }
     };
-  }, []);
+  });
 
   return (
     // unsetting width of dialog

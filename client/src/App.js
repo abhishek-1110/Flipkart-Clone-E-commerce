@@ -21,14 +21,18 @@ import DeliveryRequest from "./components/pages/DeliveryRequest";
 import ErrorPage from "./components/pages/ErrorPage";
 import PrivacyPolicy from "./components/pages/PrivacyPolicy";
 import OrderDetails from "./components/details/OrderDetails";
+import About from "./components/pages/About";
+import Contact from "./components/pages/Contact";
 // import About from "./components/pages/About";
-
+import { Toaster } from "react-hot-toast";
 function App() {
   const [progress, setProgress] = useState(0);
 
   return (
     <DataProvider>
       <BrowserRouter>
+      {/* Adding in top level component */}
+      <Toaster/>
         <LoadingBar color="#f1ee8e" height={3} progress={progress} />
         <Header />
         <Box style={{ marginTop: 54 }}>
@@ -42,8 +46,10 @@ function App() {
             <Route path="/electronicsProduct/:id" element={<DetailView2 />} />
             <Route path="/cart" element={<Cart setProgress={setProgress} />} />
             <Route path="/deliveryForm" element={<DeliveryRequest />} />
-            <Route path="/pages/privacypolicy" element={<PrivacyPolicy />} />
             <Route path="/orders/details" element={<OrderDetails />} />
+            <Route path="/pages/privacypolicy" element={<PrivacyPolicy />} />
+            <Route path="/pages/about" element={<About />} />
+            <Route path="/pages/contact" element={<Contact />} />
             <Route path="*" element={<ErrorPage />} />
           </Routes>
         </Box>
