@@ -19,6 +19,8 @@ import Snackbar from "@mui/material/Snackbar";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 
+// toast
+import toast from "react-hot-toast";
 const LeftContainer = styled(Box)(({ theme }) => ({
   minWidth: "40%",
   padding: "40px 10px 0 80px",
@@ -63,7 +65,11 @@ const ActionItem = ({ product }) => {
       }
     }
     dispatch(addToCart(id, quantity));
-    navigate("/cart");
+    toast.success("Added to cart! Navigating you to Cart.");
+
+    setTimeout(() => {
+      navigate("/cart");
+    }, 1500);
   };
 
   const buyNow = async () => {
@@ -133,7 +139,7 @@ const ActionItem = ({ product }) => {
           style={{ marginRight: 10, background: "#ff9f00" }}
           onClick={() => addItemToCart()}
         >
-           <ShoppingCartIcon style={{ fontSize: "16px" }} />
+          <ShoppingCartIcon style={{ fontSize: "16px" }} />
           {alreadyincart ? "Already in Cart" : "Add to Cart"}
         </StyledButton>
         <StyledButton
