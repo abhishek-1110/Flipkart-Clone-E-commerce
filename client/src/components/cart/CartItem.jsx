@@ -6,6 +6,7 @@ import { removeFromCart } from "../../redux/actions/cartActions";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { removeCartItems } from "../../service/api";
+import toast from "react-hot-toast";
 
 const Component = styled(Box)`
   border-top: 1px solid #f0f0f0;
@@ -35,13 +36,15 @@ const Remove = styled(Button)`
 const CartItem = ({ item }) => {
   const dispatch = useDispatch();
 
-  const removeItemFromCart = async (id) => {
+  const removeItemFromCart = async (id, title) => {
     dispatch(removeFromCart(id));
     try {
-      let data = await removeCartItems(id);
-      console.log("Delete front end", data);
+      await removeCartItems(id);
+      toast.success("Successfully removed " + title + " from Cart.")
+      // console.log("Delete front end", data);
     } catch(error) {
-      console.log("Error while deleting front end,,,", error);
+      toast.error("Something went wrong while removing item from Cart.")
+      // console.log("Error while deleting front end", error);
     }
   };
 
@@ -91,7 +94,7 @@ const CartItem = ({ item }) => {
           </Box>
         </Typography>
 
-        <Remove onClick={() => removeItemFromCart(item.id)}>Remove</Remove>
+        <Remove onClick={() => removeItemFromCart(item.id, item.title.longTitle)}>Remove</Remove>
       </Box>
     </Component>
   );
