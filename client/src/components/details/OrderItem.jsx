@@ -1,5 +1,6 @@
 import { Typography, Box, styled } from "@mui/material";
-
+import moment from "moment";
+import "moment-timezone";
 
 const Component = styled(Box)`
   border-top: 1px solid #f0f0f0;
@@ -19,8 +20,18 @@ const SmallText = styled(Box)`
   margint-top: 10px;
 `;
 
-
 const OrderItem = ({ item }) => {
+  const formatDate = (date_string) => {
+    const timestamp = date_string;
+
+    const dateIST = moment(timestamp).tz("Asia/Kolkata");
+
+    // Format the date and time in IST
+    const formattedDateTime = dateIST.format("YYYY-MM-DD, hh:mm:ss A");
+
+    return formattedDateTime;
+  };
+
   return (
     <Component>
       <LeftComponent>
@@ -42,7 +53,9 @@ const OrderItem = ({ item }) => {
             {item.price.discount} off
           </Box>
         </Typography>
-
+        <Typography style={{ marginTop: 20, wordWrap: "nowrap" }}>
+          Ordered On: {formatDate(item.date)}
+        </Typography>
       </Box>
     </Component>
   );
